@@ -1,12 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('Log Jenkins Maven Docker Git and Java version info') {
+    stage('Linter.............') {
+      agent any
       steps {
-        sh 'uname -a'
         sh 'yamllint -s .'
       }
     }
+     stage('Build') {
+           agent { docker { image 'mjbobkov/pythonwork:1.0' } }
+            steps {
+                sh 'python hello.py'
+            }
+        }
     
   }
 }
